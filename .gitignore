@@ -129,3 +129,4 @@ dmypy.json
 .pyre/
 
 config.js
+Simple_Map/static/js/config.js
