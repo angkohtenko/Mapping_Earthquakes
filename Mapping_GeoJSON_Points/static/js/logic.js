@@ -24,21 +24,22 @@ let map = L.map('mapid', {
   zoom: 2,
   layers: [streets]
 })
-// // Accessing the airport GeoJSON URL
-// let airportData = "https://raw.githubusercontent.com/angkohtenko/Mapping_Earthquakes/Mapping_GeoJSON_Points/majorAirports.json";
 
-// // Grabbing our GeoJSON data.
-// d3.json(airportData).then(function(data) {
-//   console.log(data);
-//   // Creating a GeoJSON layer with the retrieved data.
-//   L.geoJson(data, {
-//     // Turn each feature into a marker on the map.
-//     onEachFeature: function(feature, layer) {
-//       console.log(layer);
-//       layer.bindPopup("<h2>Airport code: " + feature.properties.faa + "</h2> <hr> <h3>Airport name: " + feature.properties.name + "</h3>");
-//     }
-//   }).addTo(map);
-// });
+// Accessing the airport GeoJSON URL
+let airportData = "https://raw.githubusercontent.com/angkohtenko/Mapping_Earthquakes/Mapping_GeoJSON_Points/majorAirports.json";
+
+// Grabbing our GeoJSON data.
+d3.json(airportData).then(function(data) {
+  console.log(data);
+  // Creating a GeoJSON layer with the retrieved data.
+  L.geoJson(data, {
+    // Turn each feature into a marker on the map.
+    onEachFeature: function(feature, layer) {
+      console.log(layer);
+      layer.bindPopup("<h2>Airport code: " + feature.properties.faa + "</h2> <hr> <h3>Airport name: " + feature.properties.name + "</h3>");
+    }
+  }).addTo(map);
+});
 
 // Pass our map layers into our layers control and add the layers control to the map.
 L.control.layers(baseMaps).addTo(map);
