@@ -22,31 +22,32 @@ let baseMaps = {
 let map = L.map('mapid', {
   center: [43.7, -79.3],
   zoom: 11,
-  layers: [satelliteStreets]
+  layers: [streets]
 })
 
 // Accessing the Toronto neighborhoods GeoJSON URL.
 let torontoHoods = "https://raw.githubusercontent.com/angkohtenko/Mapping_Earthquakes/Mapping_GeoJSON_Polygons/torontoNeighborhoods.json";
 
-// // create custom style
-// var myStyle = {
-//   "color": "#Ffe400",
-//   "weight": 2
-// };
+// create custom style
+var myStyle = {
+  "color": "#1e81b0",
+  "fillColor": "#Ffe400",
+  "weight": 1
+};
 
 // Grabbing our GeoJSON data.
 d3.json(torontoHoods).then(function(data) {
   console.log(data);
   // Creating a GeoJSON layer with the retrieved data.
-  L.geoJson(data).addTo(map);
-  // L.geoJson(data, {
-  //   // Turn each feature into a marker on the map.
-  //   onEachFeature: function(feature, layer) {
-  //     console.log(layer);
-  //     layer.bindPopup("<h2>Airline: " + feature.properties.airline + "</h2> <hr> <h3>Destination: " + feature.properties.dst + "</h3>");
-  //   },
-  //   style: myStyle
-  // }).addTo(map);
+  // L.geoJson(data).addTo(map);
+  L.geoJson(data, {
+    // Turn each feature into a marker on the map.
+    onEachFeature: function(feature, layer) {
+      console.log(layer);
+      layer.bindPopup("<h2>Neighborhood: " + feature.properties.AREA_NAME+ "</h2>");
+    },
+    style: myStyle
+  }).addTo(map);
 });
 
 // Pass our map layers into our layers control and add the layers control to the map.
